@@ -46,16 +46,19 @@ describe('EverCraft iteration one -', function() {
     expect(me.getHitPoints()).toBe(5);
   });
 
-  it('Character Can Attack - successful hit 20', function() {
+  it('Character Can Attack/Be Damaged - successful hit 20', function() {
     expect(me.attack(20, opponent)).toBe(true);
+    expect(opponent.getHitPoints()).toBe(3);
   });
 
-  it('Character Can Attack - successful hit 10', function() {
+  it('Character Can Attack/Be Damaged - successful hit 10', function() {
     expect(me.attack(10, opponent)).toBe(true);
+    expect(opponent.getHitPoints()).toBe(4);
   });
 
-  it('Character Can Attack - unsuccessful hit 3', function() {
+  it('Character Can Attack/Be Damaged - unsuccessful hit 3', function() {
     expect(me.attack(3, opponent)).toBe(false);
+    expect(opponent.getHitPoints()).toBe(5);
   });
 
   it('Character Can Be Damaged - successful hits until death', function() {
@@ -70,4 +73,12 @@ describe('EverCraft iteration one -', function() {
     expect(opponent.isAlive()).toBe(false);
   });
 
+  it('Character Can Be Damaged - double damage until (negative) death', function() {
+    me.attack(20, opponent);
+    expect(opponent.getHitPoints()).toBe(3);
+    me.attack(20, opponent);
+    me.attack(20, opponent);
+    expect(opponent.getHitPoints()).toBe(-1);
+    expect(opponent.isAlive()).toBe(false);
+  });
 });

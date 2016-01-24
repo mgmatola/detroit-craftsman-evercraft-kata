@@ -1,5 +1,8 @@
 var ALIGNMENT = require('../src/alignment').ALIGNMENT;
 
+var TYPICAL_DAMAGE = 1;
+var DOUBLE_DAMAGE = 2;
+
 function Character() {
   this.name = null;
   this.alignment = null;
@@ -34,8 +37,8 @@ Character.prototype.getHitPoints = function() {
   return this.hitPoints;
 };
 
-Character.prototype.decrementHitPoints = function() {
-  this.hitPoints--;
+Character.prototype.damage = function(amount) {
+  this.hitPoints -= amount;
 };
 
 Character.prototype.isAlive = function() {
@@ -45,7 +48,7 @@ Character.prototype.isAlive = function() {
 Character.prototype.attack = function (roll, opponent) {
   var success = roll >= opponent.getArmorClass();
   if (success) {
-    opponent.decrementHitPoints();
+    roll === 20 ? opponent.damage(DOUBLE_DAMAGE) : opponent.damage(TYPICAL_DAMAGE);
   }
   return success;
 };
