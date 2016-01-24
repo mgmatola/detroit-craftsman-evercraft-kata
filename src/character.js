@@ -41,7 +41,7 @@ Character.prototype.isAlive = function() {
 };
 
 Character.prototype.hit = function(roll, opponent) {
-  var success = roll > opponent.getArmorClass();
+  var success = roll >= opponent.getArmorClass();
   if (success) {
     opponent.decrementHitPoints();
   }

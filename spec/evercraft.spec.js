@@ -13,16 +13,16 @@ describe('EverCraft iteration one -', function() {
     opponent.setName('opponent');
   });
 
-  it('can get name', function() {
+  it('Create a Character - can get name', function() {
     expect(me.getName()).toBe('mike');
   });
 
-  it('can reset name', function() {
+  it('Create a Character - can reset name', function() {
     me.setName('mike2');
     expect(me.getName()).toBe('mike2');
   });
 
-  it('can set/get good/evil/neutral', function() {
+  it('Alignment - can set/get good/evil/neutral', function() {
     me.setAlignment(ALIGNMENT.GOOD);
     me.getAlignment(ALIGNMENT.GOOD);
     me.setAlignment(ALIGNMENT.EVIL);
@@ -31,27 +31,34 @@ describe('EverCraft iteration one -', function() {
     me.getAlignment(ALIGNMENT.NEUTRAL);
   });
 
-  it('cannot set alignment to illegal value', function() {
+  it('Alignment - cannot set alignment to illegal value', function() {
     var badInput = function () {
       me.setAlignment(ALIGNMENT.INVALID);
     };
     expect(badInput).toThrow();
   });
 
-  it('verify armor class', function() {
+  it('Armor Class & Hit Points - verify armor class', function() {
     expect(me.getArmorClass()).toBe(10);
   });
 
-  it('verify hit points', function() {
+  it('Armor Class & Hit Points - verify hit points', function() {
     expect(me.getHitPoints()).toBe(5);
   });
 
-  it('hit opponent', function() {
+  it('Character Can Attack - successful hit 20', function() {
     expect(me.hit(20, opponent)).toBe(true);
+  });
+
+  it('Character Can Attack - successful hit 10', function() {
+    expect(me.hit(10, opponent)).toBe(true);
+  });
+
+  it('Character Can Attack - unsuccessful hit 3', function() {
     expect(me.hit(3, opponent)).toBe(false);
   });
 
-  it('successful hits until death', function() {
+  it('Character Can Attack - successful hits until death', function() {
     expect(me.hit(15, opponent)).toBe(true);
     expect(opponent.getHitPoints()).toBe(4);
     me.hit(15, opponent);
