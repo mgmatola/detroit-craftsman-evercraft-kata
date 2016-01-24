@@ -1,6 +1,8 @@
 var ALIGNMENT = require('../src/alignment').ALIGNMENT;
 
 function Character() {
+  this.name = null;
+  this.alignment = null;
   this.armorClass = 10;
   this.hitPoints = 5;
 };
@@ -40,7 +42,7 @@ Character.prototype.isAlive = function() {
   return this.hitPoints > 1;
 };
 
-Character.prototype.hit = function(roll, opponent) {
+Character.prototype.attack = function (roll, opponent) {
   var success = roll >= opponent.getArmorClass();
   if (success) {
     opponent.decrementHitPoints();
